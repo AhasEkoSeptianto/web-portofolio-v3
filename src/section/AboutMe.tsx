@@ -7,7 +7,7 @@ import AboutImage from "../components/aboutImage";
 export default function AboutMeSection() {
   return (
     <section className="min-h-screen flex items-center container  mx-auto">
-      <div className="container mx-auto lg:grid grid-cols-2 items-center mt-20 lg:mt-0">
+      <div className="lg:grid grid-cols-2 items-center mt-20 lg:mt-0">
         <AboutImage />
 
         <div className="space-y-4 p-6">
