@@ -101,6 +101,7 @@ export default function IntroSection() {
                   text-3xl
                   font-bold
                   whitespace-nowrap
+                  text-white
                 "
               >
                 {displayText}

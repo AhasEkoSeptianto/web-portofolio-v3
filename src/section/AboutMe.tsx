@@ -1,11 +1,41 @@
+"use client";
+import { Skill } from "@/Skill";
+import CardBounced from "../components/cardBouncedSkill";
+import { motion, useMotionValue, useSpring } from "motion/react";
+import AboutImage from "../components/aboutImage";
+
 export default function AboutMeSection() {
   return (
-    <div className="container">
-      <h2 className="text-lg text-center">About me</h2>
-      <div className="grid grid-cols-2 ">
-        <div>left</div>
-        <div>right</div>
+    <section className="min-h-screen flex items-center">
+      <div className="container mx-auto grid grid-cols-2 items-center">
+        <AboutImage />
+
+        <div className="space-y-4">
+          <h2 className="text-4xl font-bold">About Me</h2>
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+            <p>
+              My name is Eko and I specialize in web developement that utilizes
+              HTML, CSS, JS, and REACT etc
+            </p>
+            <p>
+              I am a highly motivated individual and eternal optimist dedicated
+              to writing clear, concise, robust code that works. Striving to
+              never stop learning and improving. I like to have my perspective
+              and belief systems challenged so that I see the world through new
+              eyes.
+            </p>
+            <p className="mt-2">
+              I am very interested in several technologies that I am still
+              exploring, including:
+            </p>
+          </motion.div>
+          <motion.div className="flex flex-wrap gap-4 mt-4">
+            {Skill.map((skill, idx) => (
+              <CardBounced img_path={skill.image} name={skill.name} key={idx} />
+            ))}
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-white text-black space-y-4">
       <IntroSection />
       <AboutMeSection />
     </div>
