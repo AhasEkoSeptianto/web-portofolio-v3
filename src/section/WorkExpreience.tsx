@@ -12,6 +12,7 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
+import { motion, scale, useMotionValue, useSpring } from "motion/react";
 
 export default function WorkExperienceSection() {
   return (
