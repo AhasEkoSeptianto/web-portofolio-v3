@@ -1,6 +1,7 @@
-# netlify.toml (taruh di root repo, sejajar dengan package.json)
+toml# netlify.toml
 [build]
   command = "npm run build"
+  publish = ".next"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
