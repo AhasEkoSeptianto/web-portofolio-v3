@@ -63,12 +63,16 @@ export default function WorkExperienceSection() {
           </TimelineSeparator>
           <TimelineContent sx={{ py: "12px", px: 2 }}>
             <Typography variant="h6" component="span">
-              <span className="text-xs lg:text-base opacity-80 mr-4">
+              <span className="text-xs lg:text-base opacity-80 mr-4 hidden lg:block">
                 {" "}
                 Jun 2021 - Apr 2023
               </span>
               <span className="text-sm lg:text-base font-semibold">
                 PT Soegee futures
+              </span>
+              <span className="text-xs lg:text-base opacity-80 mr-4 lg:hidden">
+                {" "}
+                Jun 2021 - Apr 2023
               </span>
             </Typography>
             <Typography className="text-sm lg:text-base opacity-80">
