@@ -6,7 +6,7 @@ import AboutImage from "../components/aboutImage";
 
 export default function AboutMeSection() {
   return (
-    <section className="min-h-screen flex items-center container  mx-auto">
+    <section className="min-h-screen flex items-center container p-6 mx-auto">
       <div className="lg:grid grid-cols-2 items-center mt-20 lg:mt-0">
         <AboutImage />
 
