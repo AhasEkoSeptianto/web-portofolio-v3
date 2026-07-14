@@ -1,4 +1,13 @@
-export const Project = [
+export interface ProjectProps {
+  name: string;
+  tech: string;
+  desc: string;
+  site_preview?: string;
+  github_code: string;
+  image: string;
+}
+
+export const Project: ProjectProps[] = [
   {
     name: "Social media prism",
     tech: "nextjs/express/mongodb",

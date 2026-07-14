@@ -6,12 +6,14 @@ import AboutImage from "../components/aboutImage";
 
 export default function AboutMeSection() {
   return (
-    <section className="min-h-screen flex items-center container">
-      <div className="container mx-auto grid grid-cols-2 items-center">
+    <section className="min-h-screen flex items-center container mt-20 lg:mt-0">
+      <div className="container mx-auto lg:grid grid-cols-2 items-center">
         <AboutImage />
 
-        <div className="space-y-4">
-          <h2 className="text-4xl font-bold">About Me</h2>
+        <div className="space-y-4 p-6">
+          <h2 className="text-4xl font-bold text-center lg:text-left">
+            About Me
+          </h2>
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
             <p>
               My name is Eko and I specialize in web developement that utilizes

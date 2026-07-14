@@ -17,30 +17,8 @@ export default function ProjectSection() {
           className="w-full max-w-7xl mx-auto"
         >
           <div className="shadow-lg p-2">
-            <div className="flex justify-between">
-              <div>
-                <p className="font-bold text-lg">
-                  {project.name}{" "}
-                  <span className="text-sm font-normal opacity-80">
-                    {project.tech}
-                  </span>
-                </p>
-                <p className="text-md w-1/2">{project.desc}</p>
-              </div>
-              <div className="flex items-center space-x-4">
-                {project.site_preview ? (
-                  <a href={project.site_preview} target="__blank">
-                    <Button size="lg">Demo</Button>
-                  </a>
-                ) : null}
-                {project.github_code ? (
-                  <a href={project.github_code} target="__blank">
-                    <Button size="lg" variant="tertiary">
-                      Github
-                    </Button>
-                  </a>
-                ) : null}
-              </div>
+            <div className="hidden lg:block">
+              <Descriptions project={project} />
             </div>
             <Image
               src={project.image}
@@ -49,9 +27,40 @@ export default function ProjectSection() {
               height={1000}
               className="w-full h-auto rounded-xl"
             />
+            <div className="block lg:hidden">
+              <Descriptions project={project} />
+            </div>
           </div>
         </motion.div>
       ))}
     </section>
   );
 }
+
+const Descriptions = ({ project }: any) => {
+  return (
+    <div className="lg:flex justify-between">
+      <div>
+        <p className="font-bold text-lg">
+          {project.name}{" "}
+          <span className="text-sm font-normal opacity-80">{project.tech}</span>
+        </p>
+        <p className="text-md lg:w-1/2">{project.desc}</p>
+      </div>
+      <div className="flex items-center space-x-4">
+        {project.site_preview ? (
+          <a href={project.site_preview} target="__blank">
+            <Button size="lg">Demo</Button>
+          </a>
+        ) : null}
+        {project.github_code ? (
+          <a href={project.github_code} target="__blank">
+            <Button size="lg" variant="tertiary">
+              Github
+            </Button>
+          </a>
+        ) : null}
+      </div>
+    </div>
+  );
+};

@@ -103,7 +103,7 @@ export default function IntroSection(props: Props) {
               {/* Typing text */}
               <div
                 className="
-                  text-3xl
+                  text-sm lg:text-3xl
                   font-bold
                   whitespace-nowrap
                   text-white
