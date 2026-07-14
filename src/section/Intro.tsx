@@ -3,7 +3,11 @@
 import { motion, useAnimate } from "motion/react";
 import { useEffect, useState } from "react";
 
-export default function IntroSection() {
+interface Props {
+  setIntro: (state: boolean) => void;
+}
+
+export default function IntroSection(props: Props) {
   const [scope, animate] = useAnimate();
 
   const [expand, setExpand] = useState(false);
@@ -61,6 +65,7 @@ export default function IntroSection() {
             setExpand(true);
           } else {
             setExpanded2(true);
+            props.setIntro(false);
           }
         }}
       >
