@@ -1,6 +1,7 @@
 import AboutMeSection from "@/src/section/AboutMe";
 import IntroSection from "@/src/section/Intro";
 import ProjectSection from "@/src/section/Project";
+import WorkExperienceSection from "@/src/section/WorkExpreience";
 import Image from "next/image";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
       <IntroSection />
       <AboutMeSection />
       <ProjectSection />
+      <WorkExperienceSection />
     </div>
   );
 }
