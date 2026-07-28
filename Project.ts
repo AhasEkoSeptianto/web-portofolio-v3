@@ -11,9 +11,9 @@ export const Project: ProjectProps[] = [
   {
     name: "Social media prism",
     tech: "nextjs/express/mongodb",
-    desc: "Aplikasi media sosial dengan fitur feed dan chat yang dibuat dengan artitektur baik dengan penerapan clean code, menggunakan oauth2 dan verifikasi authentikasi token",
+    desc: "Aplikasi media sosial dengan fitur feed dan chat yang dibuat dengan artitektur baik dengan penerapan clean code, menggunakan oauth2 dan verifikasi authentikasi token dan penerapan ci/cd react testing github action docker deployment",
     site_preview: "https://sosial-mediaa.netlify.app/",
-    github_code: "https://github.com/AhasEkoSeptianto/social-media",
+    github_code: "https://github.com/AhasEkoSeptianto/social-media-monorepo",
     image: "/images-project/social-media-image.png",
   },
   {
