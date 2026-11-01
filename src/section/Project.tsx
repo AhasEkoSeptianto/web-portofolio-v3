@@ -45,7 +45,7 @@ const Descriptions = ({ project }: any) => {
           {project.name}{" "}
           <span className="text-sm font-normal opacity-80">{project.tech}</span>
         </p>
-        <p className="text-md lg:w-1/2">{project.desc}</p>
+        <p className="text-md lg:w-3/4">{project.desc}</p>
       </div>
       <div className="flex items-center space-x-4">
         {project.site_preview ? (

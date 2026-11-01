@@ -9,6 +9,14 @@ export interface ProjectProps {
 
 export const Project: ProjectProps[] = [
   {
+    name: "Wedding apps online",
+    tech: "nextjs/express/mongodb/antigravity",
+    desc: "Aplikasi undangan pernikahan online ini dibangun dengan vibe coding, terdapat 2 role (client dan editor) client dapat daftar login dashboard dan memilih template yang sudah disediakan desainnya oleh editor, editor melakukan desain template html beserte css dan js yang bisa diatur didashboard editor, pengguna dapat menyediakan data mereka dan disimpan dimonggodb dan akan terotommatisasi oleh sistem desain yang animatif dan frendly user",
+    site_preview: "https://wedding-appss.netlify.app/",
+    github_code: "https://github.com/AhasEkoSeptianto/wedding-apps",
+    image: "/images-project/wedding-apps.png",
+  },
+  {
     name: "Social media prism",
     tech: "nextjs/express/mongodb",
     desc: "Aplikasi media sosial dengan fitur feed dan chat yang dibuat dengan artitektur baik dengan penerapan clean code, menggunakan oauth2 dan verifikasi authentikasi token dan penerapan ci/cd react testing github action docker deployment",
