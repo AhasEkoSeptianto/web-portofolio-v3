@@ -16,8 +16,11 @@ import Footer from "@/src/components/Footer";
 export default function Home() {
   const mainRef = useRef<HTMLDivElement>(null);
 
-  // Spotlight card effect + 3D tilt
+  // Spotlight card effect + 3D tilt (desktop only)
   useEffect(() => {
+    const isTouchDevice = () =>
+      "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
     const handleMouseMove = (e: MouseEvent) => {
       const cards = document.querySelectorAll(".spotlight-card");
       cards.forEach((el) => {
@@ -28,8 +31,9 @@ export default function Home() {
         card.style.setProperty("--mouse-x", `${x}px`);
         card.style.setProperty("--mouse-y", `${y}px`);
 
-        // 3D tilt only when hovering
+        // 3D tilt only on non-touch devices
         if (
+          !isTouchDevice() &&
           e.clientX >= rect.left &&
           e.clientX <= rect.right &&
           e.clientY >= rect.top &&
@@ -51,8 +55,10 @@ export default function Home() {
       }
     };
 
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseleave", handleMouseLeave, true);
+    if (!isTouchDevice()) {
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseleave", handleMouseLeave, true);
+    }
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave, true);
