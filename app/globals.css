@@ -1,27 +1,187 @@
 @import "tailwindcss";
-@import "@heroui/styles";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ===== Custom Theme Tokens for Tailwind v4 ===== */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-surface: #0a0e18;
+  --color-surface-dim: #0f131d;
+  --color-surface-container-lowest: #070a12;
+  --color-surface-container-low: #111624;
+  --color-surface-container: #171c2b;
+  --color-surface-container-high: #202638;
+  --color-surface-container-highest: #2c344b;
+  --color-on-surface: #f1f5f9;
+  --color-on-surface-variant: #94a3b8;
+  --color-outline: #64748b;
+  --color-outline-variant: #334155;
+  --color-primary: #818cf8;
+  --color-primary-container: #4f46e5;
+  --color-on-primary: #0f172a;
+  --color-secondary: #c084fc;
+  --color-secondary-container: #6b21a8;
+  --color-tertiary: #38bdf8;
+  --color-tertiary-container: #0284c7;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body: "Geist", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Animations */
+  --animate-marquee: marquee 35s linear infinite;
+  --animate-pulse-slow: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float-badge: float-badge 4s ease-in-out infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
   }
+
+  @keyframes float-badge {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+
+  --animate-glow-ring: glow-ring 4s ease-in-out infinite;
+
+  @keyframes glow-ring {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+    50% { transform: scale(1.05) rotate(180deg); opacity: 0.9; }
+  }
+
+  --animate-shimmer: shimmer 8s ease infinite;
 }
 
+/* ===== Base Styles ===== */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0a0e18;
+  color: #f1f5f9;
+  font-family: "Geist", sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: #38bdf8;
+  color: #0a0e18;
+}
+
+/* ===== Subtle Cyber Grid Background ===== */
+.bg-cyber-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* ===== Spotlight Card Effect ===== */
+.spotlight-card {
+  position: relative;
+  background-clip: padding-box;
+  will-change: transform;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+    rgba(99, 102, 241, 0.35),
+    rgba(56, 189, 248, 0.2),
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+    rgba(99, 102, 241, 0.08),
+    transparent 50%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.spotlight-card:hover::before,
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
+/* ===== Cursor Glow Follower ===== */
+#cursor-glow {
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, opacity 0.3s;
+}
+
+/* ===== Marquee Pausing ===== */
+.marquee-container:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* ===== Project Card Transitions ===== */
+.project-item {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease,
+    border-color 0.3s ease;
+}
+
+/* ===== Tech card transitions ===== */
+.tech-card {
+  transition: transform 0.3s ease, opacity 0.3s ease, border-color 0.3s ease;
+}
+
+/* ===== Scroll Reveal Animation ===== */
+.reveal-element {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-element.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Shimmer Headline ===== */
+.shimmer-headline {
+  background-size: 200% auto;
+  animation: shimmer 8s ease infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: left center; }
+  50% { background-position: right center; }
+}
+
+/* ===== Skill Bar Fill Animation ===== */
+.skill-bar-fill {
+  width: 0% !important;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skill-bar-fill.animated {
+  width: var(--target-width) !important;
+}
+
+/* ===== Custom Scrollbar hide ===== */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none;
+  scroll-behavior: smooth;
 }
