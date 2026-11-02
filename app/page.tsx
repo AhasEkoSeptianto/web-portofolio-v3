@@ -45,8 +45,8 @@ export default function Home() {
     };
 
     const handleMouseLeave = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.classList.contains("spotlight-card")) {
+      const target = e.target as HTMLElement | null;
+      if (target?.classList?.contains("spotlight-card")) {
         target.style.transform = "";
       }
     };
