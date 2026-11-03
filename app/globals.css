@@ -75,48 +75,54 @@ body {
 .spotlight-card {
   position: relative;
   background-clip: padding-box;
-  will-change: transform;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.spotlight-card::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: radial-gradient(
-    400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
-    rgba(99, 102, 241, 0.35),
-    rgba(56, 189, 248, 0.2),
-    transparent 70%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
+/* Enable spotlight and 3D hover effects ONLY on desktop devices with hover & fine cursor */
+@media (hover: hover) and (pointer: fine) {
+  .spotlight-card {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+  }
 
-.spotlight-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
-    rgba(99, 102, 241, 0.08),
-    transparent 50%
-  );
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
+  .spotlight-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+      rgba(99, 102, 241, 0.35),
+      rgba(56, 189, 248, 0.2),
+      transparent 70%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
 
-.spotlight-card:hover::before,
-.spotlight-card:hover::after {
-  opacity: 1;
+  .spotlight-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+      rgba(99, 102, 241, 0.08),
+      transparent 50%
+    );
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .spotlight-card:hover::before,
+  .spotlight-card:hover::after {
+    opacity: 1;
+  }
 }
 
 /* ===== Cursor Glow Follower ===== */
@@ -147,7 +153,12 @@ body {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+}
+
+@media (min-width: 768px) {
+  .reveal-element {
+    will-change: opacity, transform;
+  }
 }
 
 .reveal-element.is-revealed {
@@ -168,12 +179,8 @@ body {
 
 /* ===== Skill Bar Fill Animation ===== */
 .skill-bar-fill {
-  width: 0% !important;
-  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.skill-bar-fill.animated {
-  width: var(--target-width) !important;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: width;
 }
 
 /* ===== Custom Scrollbar hide ===== */
@@ -184,4 +191,13 @@ body {
 html {
   scrollbar-width: none;
   scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 767px) {
+  /* Prevent horizontal shift and enable native smooth momentum scrolling on mobile */
+  html, body {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { Skill, type SkillProps } from "@/Skill";
 
@@ -16,20 +16,46 @@ const categoryLabels: Record<Category, string> = {
   design: "Design",
 };
 
-const colorMap: Record<string, { bar: string; text: string; bg: string; border: string }> = {
-  frontend: { bar: "bg-tertiary", text: "text-tertiary", bg: "bg-tertiary/10", border: "border-tertiary/30" },
-  backend: { bar: "bg-primary", text: "text-primary", bg: "bg-primary/10", border: "border-primary/30" },
-  database: { bar: "bg-secondary", text: "text-secondary", bg: "bg-secondary/10", border: "border-secondary/30" },
-  tools: { bar: "bg-emerald-400", text: "text-emerald-400", bg: "bg-emerald-400/10", border: "border-emerald-400/30" },
-  design: { bar: "bg-amber-400", text: "text-amber-400", bg: "bg-amber-400/10", border: "border-amber-400/30" },
+const colorMap: Record<
+  string,
+  { bar: string; text: string; bg: string; border: string }
+> = {
+  frontend: {
+    bar: "bg-tertiary",
+    text: "text-tertiary",
+    bg: "bg-tertiary/10",
+    border: "border-tertiary/30",
+  },
+  backend: {
+    bar: "bg-primary",
+    text: "text-primary",
+    bg: "bg-primary/10",
+    border: "border-primary/30",
+  },
+  database: {
+    bar: "bg-secondary",
+    text: "text-secondary",
+    bg: "bg-secondary/10",
+    border: "border-secondary/30",
+  },
+  tools: {
+    bar: "bg-emerald-400",
+    text: "text-emerald-400",
+    bg: "bg-emerald-400/10",
+    border: "border-emerald-400/30",
+  },
+  design: {
+    bar: "bg-amber-400",
+    text: "text-amber-400",
+    bg: "bg-amber-400/10",
+    border: "border-amber-400/30",
+  },
 };
 
 function SkillCard({ skill }: { skill: SkillProps }) {
   const colors = colorMap[skill.category] || colorMap.frontend;
   return (
-    <div
-      className="tech-card spotlight-card group p-4 rounded-2xl bg-surface-container-low border border-outline-variant/40 hover:border-tertiary/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between gap-4"
-    >
+    <div className="tech-card spotlight-card group p-4 rounded-2xl bg-surface-container-low border border-outline-variant/40 hover:border-tertiary/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between gap-4">
       <div className="flex items-start justify-between">
         <div className="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden">
           <Image
@@ -41,14 +67,18 @@ function SkillCard({ skill }: { skill: SkillProps }) {
           />
         </div>
         {skill.label && (
-          <span className={`px-2 py-0.5 rounded font-mono text-[10px] ${colors.bg} ${colors.text} font-semibold uppercase tracking-wider`}>
+          <span
+            className={`px-2 py-0.5 rounded font-mono text-[10px] ${colors.bg} ${colors.text} font-semibold uppercase tracking-wider`}
+          >
             {skill.label}
           </span>
         )}
       </div>
       <div>
         <div className="flex items-center justify-between mb-1.5">
-          <h4 className={`font-headline font-bold text-sm text-white group-hover:${colors.text} transition-colors`}>
+          <h4
+            className={`font-headline font-bold text-sm text-white group-hover:${colors.text} transition-colors`}
+          >
             {skill.name}
           </h4>
           <span className="font-mono text-xs text-outline capitalize">
@@ -59,7 +89,7 @@ function SkillCard({ skill }: { skill: SkillProps }) {
           <div className="h-1.5 flex-1 bg-surface-container-highest rounded-full overflow-hidden">
             <div
               className={`h-full ${colors.bar} rounded-full skill-bar-fill`}
-              style={{ "--target-width": `${skill.proficiency}%` } as React.CSSProperties}
+              style={{ width: `${skill.proficiency}%` }}
             />
           </div>
           <span className={`font-mono text-[10px] ${colors.text} font-bold`}>
@@ -85,7 +115,7 @@ export default function SkillsSection() {
       id="skills"
     >
       {/* Section Header & Filter Tabs */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div className="reveal-element flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
             <span className="font-mono text-xs text-tertiary uppercase tracking-widest font-bold">
@@ -97,17 +127,17 @@ export default function SkillsSection() {
             The Technical Arsenal
           </h2>
           <p className="text-on-surface-variant text-sm sm:text-base max-w-xl">
-            Technologies and tools I use to build modern web applications.
+            Technologies and tools I use to build modern, responsive, and scalable web applications.
           </p>
         </div>
 
-        {/* Category Filter Tabs */}
-        <div className="flex flex-wrap items-center gap-1 p-1 rounded-full bg-surface-container-low border border-outline-variant/60 self-start md:self-auto shadow-inner">
+        {/* Category Filter Tabs with horizontal overflow on mobile */}
+        <div className="flex items-center gap-1 p-1 rounded-2xl sm:rounded-full bg-surface-container-low border border-outline-variant/60 self-start md:self-auto shadow-inner overflow-x-auto max-w-full">
           {(Object.keys(categoryLabels) as Category[]).map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-1.5 rounded-full font-mono text-xs transition-all ${
+              className={`px-4 py-1.5 rounded-xl sm:rounded-full font-mono text-xs whitespace-nowrap transition-all ${
                 activeCategory === cat
                   ? "font-bold bg-primary text-surface shadow-sm"
                   : "text-on-surface-variant hover:text-white"
@@ -119,24 +149,23 @@ export default function SkillsSection() {
         </div>
       </div>
 
-      {/* Skills Grid */}
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12"
-        layout
-      >
-        {filteredSkills.map((skill, i) => (
+      {/* Skills Grid with smooth fade transition (no y jump on mobile) */}
+      <div className="min-h-[280px] mb-12">
+        <AnimatePresence mode="wait">
           <motion.div
-            key={skill.name}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, delay: i * 0.03 }}
-            layout
+            key={activeCategory}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4"
           >
-            <SkillCard skill={skill} />
+            {filteredSkills.map((skill) => (
+              <SkillCard key={skill.name} skill={skill} />
+            ))}
           </motion.div>
-        ))}
-      </motion.div>
+        </AnimatePresence>
+      </div>
 
       {/* 3 Pillars of Competence */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -146,17 +175,20 @@ export default function SkillsSection() {
               <span className="material-symbols-outlined text-[22px]">code</span>
             </div>
             <span className="font-mono text-xs text-primary font-bold px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/20">
-              Frontend
+              Frontend // 92%
             </span>
           </div>
           <h3 className="font-headline text-lg font-bold text-white">
-            Frontend Development
+            Frontend Architecture
           </h3>
           <div className="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
-            <div className="bg-primary h-full rounded-full w-[92%]" />
+            <div
+              className="bg-primary h-full rounded-full skill-bar-fill"
+              style={{ width: "92%" }}
+            />
           </div>
           <p className="text-sm text-on-surface-variant leading-relaxed">
-            Building responsive, performant UI with React, Next.js, Tailwind CSS, and modern component architectures.
+            Building responsive, performant user interfaces with React, Next.js App Router, Tailwind CSS, and component systems.
           </p>
           <div className="pt-2 flex flex-wrap gap-1.5 font-mono text-[11px] text-outline">
             <span className="px-2 py-0.5 rounded bg-surface-container">React</span>
@@ -171,17 +203,20 @@ export default function SkillsSection() {
               <span className="material-symbols-outlined text-[22px]">dns</span>
             </div>
             <span className="font-mono text-xs text-tertiary font-bold px-2.5 py-0.5 rounded-full bg-tertiary/10 border border-tertiary/20">
-              Backend
+              Backend // 88%
             </span>
           </div>
           <h3 className="font-headline text-lg font-bold text-white">
-            Backend & API
+            Backend &amp; API Systems
           </h3>
           <div className="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
-            <div className="bg-tertiary h-full rounded-full w-[88%]" />
+            <div
+              className="bg-tertiary h-full rounded-full skill-bar-fill"
+              style={{ width: "88%" }}
+            />
           </div>
           <p className="text-sm text-on-surface-variant leading-relaxed">
-            Designing REST APIs with Express.js, Node.js, Laravel, and Django. Database management with MongoDB &amp; MySQL.
+            Designing RESTful APIs with Node.js, Express, Laravel, and Django. Managing databases with MongoDB and MySQL.
           </p>
           <div className="pt-2 flex flex-wrap gap-1.5 font-mono text-[11px] text-outline">
             <span className="px-2 py-0.5 rounded bg-surface-container">Express.js</span>
@@ -196,17 +231,20 @@ export default function SkillsSection() {
               <span className="material-symbols-outlined text-[22px]">tune</span>
             </div>
             <span className="font-mono text-xs text-secondary font-bold px-2.5 py-0.5 rounded-full bg-secondary/10 border border-secondary/20">
-              DevOps & Design
+              DevOps // 78%
             </span>
           </div>
           <h3 className="font-headline text-lg font-bold text-white">
-            Tools & Design
+            DevOps &amp; Design
           </h3>
           <div className="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
-            <div className="bg-secondary h-full rounded-full w-[78%]" />
+            <div
+              className="bg-secondary h-full rounded-full skill-bar-fill"
+              style={{ width: "78%" }}
+            />
           </div>
           <p className="text-sm text-on-surface-variant leading-relaxed">
-            CI/CD pipelines, Docker, Linux administration, and UI/UX design with Figma and Photoshop.
+            Deployment workflows, Docker containerization, Linux environments, and design system authoring with Figma and Photoshop.
           </p>
           <div className="pt-2 flex flex-wrap gap-1.5 font-mono text-[11px] text-outline">
             <span className="px-2 py-0.5 rounded bg-surface-container">Docker</span>
@@ -218,4 +256,3 @@ export default function SkillsSection() {
     </section>
   );
 }
-

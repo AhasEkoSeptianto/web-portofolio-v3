@@ -16,77 +16,76 @@ import Footer from "@/src/components/Footer";
 export default function Home() {
   const mainRef = useRef<HTMLDivElement>(null);
 
-  // Spotlight card effect + 3D tilt (desktop only)
+  // High-performance spotlight card & 3D tilt effect (desktop only)
   useEffect(() => {
-    const isTouchDevice = () =>
-      "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    // Only run on desktop devices with hover & fine pointer
+    const isDesktop = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!isDesktop) return;
+
+    let activeCard: HTMLElement | null = null;
 
     const handleMouseMove = (e: MouseEvent) => {
-      const cards = document.querySelectorAll(".spotlight-card");
-      cards.forEach((el) => {
-        const card = el as HTMLElement;
+      const target = e.target as HTMLElement | null;
+      const card = target?.closest?.(".spotlight-card") as HTMLElement | null;
+
+      // If moved off the previous card, reset its transform
+      if (activeCard && activeCard !== card) {
+        activeCard.style.transform = "";
+        activeCard = null;
+      }
+
+      if (card) {
+        activeCard = card;
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
+
         card.style.setProperty("--mouse-x", `${x}px`);
         card.style.setProperty("--mouse-y", `${y}px`);
 
-        // 3D tilt only on non-touch devices
-        if (
-          !isTouchDevice() &&
-          e.clientX >= rect.left &&
-          e.clientX <= rect.right &&
-          e.clientY >= rect.top &&
-          e.clientY <= rect.bottom
-        ) {
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const deltaX = (x - centerX) / centerX;
-          const deltaY = (y - centerY) / centerY;
-          card.style.transform = `perspective(1000px) rotateX(${-deltaY * 3}deg) rotateY(${deltaX * 3}deg) translateY(-4px)`;
-        }
-      });
-    };
-
-    const handleMouseLeave = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
-      if (target?.classList?.contains("spotlight-card")) {
-        target.style.transform = "";
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const deltaX = (x - centerX) / centerX;
+        const deltaY = (y - centerY) / centerY;
+        card.style.transform = `perspective(1000px) rotateX(${-deltaY * 3}deg) rotateY(${deltaX * 3}deg) translateY(-4px)`;
       }
     };
 
-    if (!isTouchDevice()) {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseleave", handleMouseLeave, true);
-    }
+    const handleMouseLeave = () => {
+      if (activeCard) {
+        activeCard.style.transform = "";
+        activeCard = null;
+      }
+    };
+
+    document.addEventListener("mousemove", handleMouseMove, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave);
+
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseleave", handleMouseLeave, true);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      if (activeCard) {
+        activeCard.style.transform = "";
+      }
     };
   }, []);
 
-  // Scroll reveal observer
+  // Scroll reveal observer for elements with .reveal-element
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-revealed");
-            if (entry.target.classList.contains("skill-bar-fill")) {
-              entry.target.classList.add("animated");
-            }
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
 
     const revealEls = document.querySelectorAll(".reveal-element");
     revealEls.forEach((el) => observer.observe(el));
-
-    const skillBars = document.querySelectorAll(".skill-bar-fill");
-    skillBars.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
