@@ -33,6 +33,25 @@ export const Project: ProjectProps[] = [
       "Mengimplementasikan arsitektur role-based dengan Next.js frontend, Express REST API, dan MongoDB untuk menyimpan template serta data user secara terstruktur.",
   },
   {
+    name: "SignageHub – Real-Time Digital Signage & Fleet Management",
+    tech: "Next.js / Electron / WebSocket / Supabase postgress",
+    desc: "Sistem manajemen jaringan display digital signage terintegrasi berbasis arsitektur hybrid (Web & Desktop). Menggabungkan Next.js Admin Dashboard dan Electron Client Player yang berkomunikasi dua arah via WebSocket, memungkinkan administrator melakukan remote push video secara instan, pemantauan status perangkat secara real-time, simulasi player interaktif, serta sinkronisasi data persisten dengan Supabase.",
+    site_preview: "https://signage-control-panel.onrender.com/",
+    github_code: "https://github.com/AhasEkoSeptianto/Signage-Control-Panel",
+    image: "/images-project/Signase.png",
+    category: "fullstack",
+    techPills: ["Nextjs", "Electron", "Postgressql", "Antigravity"],
+    stats: [
+      { label: "Sync Engine", val: "Live WebSocket" },
+      { label: "Architecture", val: "Hybrid Web/Desktop" },
+      { label: "Database", val: "Supabase PG" },
+    ],
+    challenge:
+      "Membangun komunikasi dua arah dengan latensi rendah antara Web Dashboard dan aplikasi desktop Electron untuk distribusi video dan telemetri perangkat secara real-time, serta memvalidasi otentikasi Device ID agar hanya perangkat resmi yang dapat terhubung.",
+    solution:
+      "Mengimplementasikan server WebSocket custom dengan role-based message routing, handshake token security, validasi Device ID terpusat ke database Supabase PostgreSQL, serta in-dashboard player simulator untuk pengujian tampilan langsung.",
+  },
+  {
     name: "Social Media Prism",
     tech: "Next.js / Express / MongoDB",
     desc: "Aplikasi media sosial dengan fitur feed dan chat, dibangun dengan arsitektur clean code, OAuth2, verifikasi token, dan penerapan CI/CD dengan React Testing, GitHub Actions, dan Docker deployment.",
@@ -56,7 +75,8 @@ export const Project: ProjectProps[] = [
     tech: "React.js / Express / MongoDB",
     desc: "Website universitas dengan fitur boarding informasi dan pencatatan kemahasiswaan, fitur login sebagai admin yang juga dapat mendata dosen dan pengelola kampus.",
     site_preview: "https://website-stikomckid-v2.netlify.app/",
-    github_code: "https://github.com/AhasEkoSeptianto/website-stikomckiv2-react",
+    github_code:
+      "https://github.com/AhasEkoSeptianto/website-stikomckiv2-react",
     image: "/images-project/web_stikomcki.png",
     category: "enterprise",
     techPills: ["React.js", "Express", "MongoDB"],
@@ -75,7 +95,8 @@ export const Project: ProjectProps[] = [
     tech: "React / Express / MongoDB",
     desc: "Website pendataan UMKM dengan fitur menampilkan kartu keanggotaan digital. Dibangun sebagai project ujian KKP.",
     site_preview: "https://keanggotaan-umkm-paguyuban.netlify.app/",
-    github_code: "https://github.com/AhasEkoSeptianto/kkp_pendataananggotaumkm.git",
+    github_code:
+      "https://github.com/AhasEkoSeptianto/kkp_pendataananggotaumkm.git",
     image: "/images-project/umkm_paguyuban.jpeg",
     category: "enterprise",
     techPills: ["React", "Express", "MongoDB"],
