@@ -150,7 +150,7 @@ export const Skill: SkillProps[] = [
   {
     name: "Postgres",
     image: "/postgres.svg",
-    category: "databas",
+    category: "database",
     proficiency: 75,
     label: "SQL",
   },
