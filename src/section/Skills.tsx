@@ -5,7 +5,13 @@ import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { Skill, type SkillProps } from "@/Skill";
 
-type Category = "all" | "frontend" | "backend" | "database" | "tools" | "design";
+type Category =
+  | "all"
+  | "frontend"
+  | "backend"
+  | "database"
+  | "tools"
+  | "design";
 
 const categoryLabels: Record<Category, string> = {
   all: `All (${Skill.length})`,
@@ -127,7 +133,8 @@ export default function SkillsSection() {
             The Technical Arsenal
           </h2>
           <p className="text-on-surface-variant text-sm sm:text-base max-w-xl">
-            Technologies and tools I use to build modern, responsive, and scalable web applications.
+            Technologies and tools I use to build modern, responsive, and
+            scalable web applications.
           </p>
         </div>
 
@@ -172,7 +179,9 @@ export default function SkillsSection() {
         <div className="spotlight-card bg-surface-container-low hover:bg-surface-container border border-outline-variant/40 p-6 rounded-2xl flex flex-col gap-4 transition-all duration-300 group shadow-sm hover:shadow-xl">
           <div className="flex items-center justify-between">
             <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-surface transition-colors">
-              <span className="material-symbols-outlined text-[22px]">code</span>
+              <span className="material-symbols-outlined text-[22px]">
+                code
+              </span>
             </div>
             <span className="font-mono text-xs text-primary font-bold px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/20">
               Frontend // 92%
@@ -188,12 +197,19 @@ export default function SkillsSection() {
             />
           </div>
           <p className="text-sm text-on-surface-variant leading-relaxed">
-            Building responsive, performant user interfaces with React, Next.js App Router, Tailwind CSS, and component systems.
+            Building responsive, performant user interfaces with React, Next.js
+            App Router, Tailwind CSS, and component systems.
           </p>
           <div className="pt-2 flex flex-wrap gap-1.5 font-mono text-[11px] text-outline">
-            <span className="px-2 py-0.5 rounded bg-surface-container">React</span>
-            <span className="px-2 py-0.5 rounded bg-surface-container">Next.js</span>
-            <span className="px-2 py-0.5 rounded bg-surface-container">Tailwind</span>
+            <span className="px-2 py-0.5 rounded bg-surface-container">
+              React
+            </span>
+            <span className="px-2 py-0.5 rounded bg-surface-container">
+              Next.js
+            </span>
+            <span className="px-2 py-0.5 rounded bg-surface-container">
+              Tailwind
+            </span>
           </div>
         </div>
 
@@ -216,19 +232,28 @@ export default function SkillsSection() {
             />
           </div>
           <p className="text-sm text-on-surface-variant leading-relaxed">
-            Designing RESTful APIs with Node.js, Express, Laravel, and Django. Managing databases with MongoDB and MySQL.
+            Designing RESTful APIs with Node.js, Express, Laravel, and Django.
+            Managing databases with Postgres and MySQL.
           </p>
           <div className="pt-2 flex flex-wrap gap-1.5 font-mono text-[11px] text-outline">
-            <span className="px-2 py-0.5 rounded bg-surface-container">Express.js</span>
-            <span className="px-2 py-0.5 rounded bg-surface-container">MongoDB</span>
-            <span className="px-2 py-0.5 rounded bg-surface-container">MySQL</span>
+            <span className="px-2 py-0.5 rounded bg-surface-container">
+              Express.js
+            </span>
+            <span className="px-2 py-0.5 rounded bg-surface-container">
+              Postgres
+            </span>
+            <span className="px-2 py-0.5 rounded bg-surface-container">
+              MySQL
+            </span>
           </div>
         </div>
 
         <div className="spotlight-card bg-surface-container-low hover:bg-surface-container border border-outline-variant/40 p-6 rounded-2xl flex flex-col gap-4 transition-all duration-300 group shadow-sm hover:shadow-xl">
           <div className="flex items-center justify-between">
             <div className="w-11 h-11 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-surface transition-colors">
-              <span className="material-symbols-outlined text-[22px]">tune</span>
+              <span className="material-symbols-outlined text-[22px]">
+                tune
+              </span>
             </div>
             <span className="font-mono text-xs text-secondary font-bold px-2.5 py-0.5 rounded-full bg-secondary/10 border border-secondary/20">
               DevOps // 78%
@@ -244,12 +269,19 @@ export default function SkillsSection() {
             />
           </div>
           <p className="text-sm text-on-surface-variant leading-relaxed">
-            Deployment workflows, Docker containerization, Linux environments, and design system authoring with Figma and Photoshop.
+            Deployment workflows, Docker containerization, Linux environments,
+            and design system authoring with Figma and Photoshop.
           </p>
           <div className="pt-2 flex flex-wrap gap-1.5 font-mono text-[11px] text-outline">
-            <span className="px-2 py-0.5 rounded bg-surface-container">Docker</span>
-            <span className="px-2 py-0.5 rounded bg-surface-container">Figma</span>
-            <span className="px-2 py-0.5 rounded bg-surface-container">Linux</span>
+            <span className="px-2 py-0.5 rounded bg-surface-container">
+              Docker
+            </span>
+            <span className="px-2 py-0.5 rounded bg-surface-container">
+              Figma
+            </span>
+            <span className="px-2 py-0.5 rounded bg-surface-container">
+              Linux
+            </span>
           </div>
         </div>
       </div>

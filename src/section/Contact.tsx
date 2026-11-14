@@ -10,7 +10,7 @@ export default function ContactSection() {
   const [waFeedback, setWaFeedback] = useState("");
   const [emailCopied, setEmailCopied] = useState(false);
   const [waStarterText, setWaStarterText] = useState(
-    "Halo Eko, ada tawaran project menarik"
+    "Halo Eko, ada tawaran project menarik",
   );
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -32,7 +32,7 @@ export default function ContactSection() {
   }
 
   function copyWhatsAppNumber() {
-    navigator.clipboard.writeText("+6281234567890").then(() => {
+    navigator.clipboard.writeText("+685810217197").then(() => {
       setWaFeedback("Phone number copied: +62 812-3456-7890");
       setTimeout(() => setWaFeedback(""), 2500);
     });
@@ -61,8 +61,8 @@ export default function ContactSection() {
           Let&apos;s Build Something Together
         </h2>
         <p className="text-on-surface-variant text-sm sm:text-base max-w-xl">
-          Open for frontend developer roles, freelance projects, or collaboration
-          opportunities.
+          Open for frontend developer roles, freelance projects, or
+          collaboration opportunities.
         </p>
       </div>
 
@@ -134,9 +134,8 @@ export default function ContactSection() {
               <div className="pt-2 flex items-center gap-2">
                 <a
                   className="flex-1 py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-surface font-mono text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_28px_rgba(16,185,129,0.5)]"
-                  href={`https://wa.me/6281234567890?text=${encodeURIComponent(waStarterText)}`}
+                  href={`https://wa.me/685810217197?text=${encodeURIComponent(waStarterText)}`}
                   rel="noopener noreferrer"
-                  target="_blank"
                 >
                   <span>Chat via WhatsApp</span>
                   <span className="material-symbols-outlined text-[16px]">
@@ -298,7 +297,9 @@ export default function ContactSection() {
                 type="submit"
                 disabled={sending}
               >
-                <span>{sending ? "Sending..." : submitted ? "Sent" : "Send Message"}</span>
+                <span>
+                  {sending ? "Sending..." : submitted ? "Sent" : "Send Message"}
+                </span>
                 <span className="material-symbols-outlined text-[18px]">
                   {sending ? "sync" : submitted ? "done_all" : "send"}
                 </span>
